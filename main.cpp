@@ -10,7 +10,9 @@ void push(Node* &head, char value);
 char peek(Node* top);
 void pop(Node* &head);
 void enqueue(Queue* &front, Queue* &tail, char value);
+void dequeue(Queue* &front, Queue* &tail);
 void printQueue(Queue* top);
+void createTree();
 
 int main() {
   Node* head = NULL;
@@ -65,6 +67,10 @@ int main() {
     enqueue(front, tail, data);
   }
   printQueue(front);
+  
+
+  cout << "Now making binary Tree" << endl;
+  
 }
 
 void push(Node* &head, char value) {
@@ -109,6 +115,22 @@ void enqueue(Queue* &front, Queue* &tail, char value) {
   }
 }
 
+void dequeue(Queue* &front, Queue* &tail) {
+  if (front == NULL) {
+    cout << "Queueu Empty" << endl;
+    return;
+  }
+  if (front == tail) {
+    free(front);
+    front = tail = NULL;
+  }
+  else {
+    Queue* temp = front;
+    front = front->next;
+    free(temp);
+  }
+}
+
 void printQueue(Queue* top) {
   Queue* curr = top;
   while (curr != NULL) {
@@ -118,3 +140,6 @@ void printQueue(Queue* top) {
   cout << endl;
 }
 
+void createTree() {
+  
+}

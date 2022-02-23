@@ -3,12 +3,15 @@
 
 class BinaryTree {
  public:
-  BinaryTree* getNext();
-  BinaryTree();
-  void setNext(BinaryTree*);
+  BinaryTree* getRight();
+  BinaryTree* getLeft();
+  BinaryTree(char newvalue);
+  void setRight(BinaryTree* newright);
+  void setLeft(BinaryTree* newleft);
   ~BinaryTree();
+  
   char value;
-  BindaryTree* right;
+  BinaryTree* right;
   BinaryTree* left;
   
 };
