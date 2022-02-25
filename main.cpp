@@ -1,5 +1,6 @@
 #include "node.h"
 #include "quee.h"
+#include "BinaryTree.h"
 #include <iostream>
 #include <cstring>
 #include <ctype.h>
@@ -12,12 +13,17 @@ void pop(Node* &head);
 void enqueue(Queue* &front, Queue* &tail, char value);
 void dequeue(Queue* &front, Queue* &tail);
 void printQueue(Queue* top);
+char peekQueue(Queue* top);
 void createTree();
+void binaryPush(BinaryTree* &binaryHead, char value);
+char binaryPeek(BinaryTree* top);
+void binaryPop(BinaryTree* &binaryHead);
 
 int main() {
   Node* head = NULL;
   Queue* front = NULL;
   Queue* tail = NULL;
+  BinaryTree* binaryHead = NULL;
   char input[200];
   cout << "enter in your equation" << endl;
   cin.getline(input, 200);
@@ -70,7 +76,32 @@ int main() {
   
 
   cout << "Now making binary Tree" << endl;
-  
+  /*char a = peekQueue(front);
+  cout << a << endl;
+  dequeue(front, tail);
+  printQueue(front);
+  a = peekQueue(front);
+  cout << a << endl;*/
+  while (front != NULL) {
+    char a = peekQueue(front);
+    dequeue(front, tail);
+    if (isdigit(a)) {
+      //cout << a << endl;
+      binaryPush(binaryHead, a);
+      char t = binaryPeek(binaryHead);
+      //cout << t;
+    }
+    else {
+      char firstValue = binaryPeek(binaryHead);
+      binaryPop(binaryHead);
+      char secondValue = binaryPeek(binaryHead);
+      binaryPop(binaryHead);
+      
+      binaryPush(binaryHead, a);
+      cout << firstValue << endl;
+      cout << secondValue << endl;
+    }
+  }
 }
 
 void push(Node* &head, char value) {
@@ -138,6 +169,26 @@ void printQueue(Queue* top) {
     curr = curr->next;
   }
   cout << endl;
+}
+
+char peekQueue(Queue* top) {
+  return top->value;
+}
+
+void binaryPop(BinaryTree* &binaryHead) {
+   BinaryTree* temp;
+   temp = binaryHead;
+   binaryHead = temp->next;
+}
+
+void binaryPush(BinaryTree* &binaryHead, char value) {
+  BinaryTree* temp = new BinaryTree(value);
+  temp->next = binaryHead;
+  binaryHead = temp;
+}
+
+char binaryPeek(BinaryTree* head) {
+  return head->value;
 }
 
 void createTree() {
