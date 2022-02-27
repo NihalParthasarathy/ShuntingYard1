@@ -15,9 +15,10 @@ void dequeue(Queue* &front, Queue* &tail);
 void printQueue(Queue* top);
 char peekQueue(Queue* top);
 void createTree();
-void binaryPush(BinaryTree* &binaryHead, char value);
+void binaryPush(BinaryTree* &binaryHead, BinaryTree* &current);
 char binaryPeek(BinaryTree* top);
-void binaryPop(BinaryTree* &binaryHead);
+void binaryPop(BinaryTree* &binaryHead, BinaryTree* &current);
+void printTree(BinaryTree* binaryHead);
 
 int main() {
   Node* head = NULL;
@@ -87,21 +88,23 @@ int main() {
     dequeue(front, tail);
     if (isdigit(a)) {
       //cout << a << endl;
-      binaryPush(binaryHead, a);
+      BinaryTree* newNode = new BinaryTree(a);
+      binaryPush(binaryHead, newNode);
       char t = binaryPeek(binaryHead);
       //cout << t;
     }
     else {
-      char firstValue = binaryPeek(binaryHead);
-      binaryPop(binaryHead);
-      char secondValue = binaryPeek(binaryHead);
-      binaryPop(binaryHead);
+      BinaryTree* newNode = new BinaryTree(a);
+      BinaryTree* temp = NULL;
+      binaryPop(binaryHead, temp);
+      newNode->setRight(temp);
+      binaryPop(binaryHead, temp);
+      newNode->setLeft(temp);
+      binaryPush(binaryHead, newNode);
       
-      binaryPush(binaryHead, a);
-      cout << firstValue << endl;
-      cout << secondValue << endl;
     }
   }
+  //printTree(binaryHead);
 }
 
 void push(Node* &head, char value) {
@@ -175,14 +178,13 @@ char peekQueue(Queue* top) {
   return top->value;
 }
 
-void binaryPop(BinaryTree* &binaryHead) {
-   BinaryTree* temp;
-   temp = binaryHead;
-   binaryHead = temp->next;
+void binaryPop(BinaryTree* &binaryHead, BinaryTree* &current) {
+   current = binaryHead;
+   binaryHead = binaryHead->next;
 }
 
-void binaryPush(BinaryTree* &binaryHead, char value) {
-  BinaryTree* temp = new BinaryTree(value);
+void binaryPush(BinaryTree* &binaryHead, BinaryTree* &current) {
+  BinaryTree* temp = current;
   temp->next = binaryHead;
   binaryHead = temp;
 }
@@ -193,4 +195,30 @@ char binaryPeek(BinaryTree* head) {
 
 void createTree() {
   
+}
+
+void printTree(BinaryTree* binaryHead) {
+  BinaryTree* temp = binaryHead;
+  while (temp != NULL) {
+    cout << "top:" << endl;
+    cout << temp->value << endl;
+
+    cout << "Left: " << temp->getLeft()->value << " " << "Right " << temp->getRight()->value << endl;
+    
+    if (isdigit(temp->getLeft()->value)) {
+      temp = temp->getRight();
+    }
+    else if (isdigit(temp->getRight()->value)) {
+      temp = temp->getLeft();
+    }
+    
+    /*if (temp->left == NULL) {
+      break;
+    }
+    else {
+      cout << "Left: " << temp->getLeft()->value << " " << "Right " << temp->getRight()->value << endl;
+      temp = temp->getRight();
+      }*/
+  }
+
 }
