@@ -19,6 +19,9 @@ void binaryPush(BinaryTree* &binaryHead, BinaryTree* &current);
 char binaryPeek(BinaryTree* top);
 void binaryPop(BinaryTree* &binaryHead, BinaryTree* &current);
 void printTree(BinaryTree* binaryHead);
+void prefix(BinaryTree* current);
+void postfix(BinaryTree* current);
+void infix(BinaryTree* current);
 
 int main() {
   Node* head = NULL;
@@ -105,6 +108,14 @@ int main() {
     }
   }
   //printTree(binaryHead);
+  cout << "prefix: ";
+  prefix(binaryHead);
+  cout << endl;
+  cout << "postfix: ";
+  postfix(binaryHead);
+  cout << endl;
+  cout << "infix: ";
+  infix(binaryHead);
 }
 
 void push(Node* &head, char value) {
@@ -220,5 +231,34 @@ void printTree(BinaryTree* binaryHead) {
       temp = temp->getRight();
       }*/
   }
+}
 
+void prefix(BinaryTree* current) {
+  cout << current->value;
+  if (current->left != NULL) {
+    prefix(current->left);
+  }
+  if (current->right != NULL) {
+    prefix(current->right);
+  }
+}
+
+void postfix(BinaryTree* current) {
+  if (current->left != NULL) {
+    postfix(current->left);
+  }
+  if (current->right != NULL) {
+    postfix(current->right);
+  }
+  cout << current->value;
+}
+
+void infix(BinaryTree* current) {
+  if (current->left != NULL) {
+    infix(current->left);
+  }
+  cout << current->value;
+  if (current->right != NULL) {
+    infix(current->right);
+  }
 }
