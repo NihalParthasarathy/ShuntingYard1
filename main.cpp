@@ -113,7 +113,7 @@ int main() {
       binaryPush(binaryHead, newNode);//Pushes to stack
     }
   }
-  
+  //printTree(binaryHead);
   cout << "prefix: ";
   prefix(binaryHead);
   cout << endl;
@@ -232,11 +232,11 @@ void printTree(BinaryTree* binaryHead) {//Prints the tree
 
 void prefix(BinaryTree* current) {//Prints out the prefix equation
   cout << current->value;
-  if (current->left != NULL) {
-    prefix(current->left);//Recurcive call
-  }
   if (current->right != NULL) {
     prefix(current->right);//Recurcive call
+  }
+  if (current->left != NULL) {
+    prefix(current->left);//Recurcive call
   }
 }
 
