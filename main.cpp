@@ -1,6 +1,7 @@
 //Nihal Parthasarathy
 //2/28/2022
 //This program use stacks and queues to translate infix equations to postfix then uses a bindary tree to translate that to prefix, postfix, and infix form
+//Help from kushal
 
 //Imports and Inclusions
 #include "node.h"
